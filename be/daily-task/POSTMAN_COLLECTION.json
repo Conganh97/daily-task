@@ -1,0 +1,324 @@
+{
+  "info": {
+    "name": "Daily Task API",
+    "description": "Complete API collection for Daily Task application",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api",
+      "type": "string"
+    },
+    {
+      "key": "username",
+      "value": "john.doe",
+      "type": "string"
+    },
+    {
+      "key": "taskId",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "date",
+      "value": "2024-01-01",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "User Management",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{username}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": ["{{baseUrl}}"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "Check Username Exists",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}/exists",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}", "exists"]
+            }
+          }
+        },
+        {
+          "name": "Get User by Username",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Task Management",
+      "item": [
+        {
+          "name": "Get All Tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}/tasks",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}", "tasks"]
+            }
+          }
+        },
+        {
+          "name": "Get Tasks by Date",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}/tasks?date={{date}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}", "tasks"],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "{{date}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Complete project documentation\",\n  \"description\": \"Write comprehensive API docs\",\n  \"date\": \"{{date}}\",\n  \"username\": \"{{username}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}/tasks",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}", "tasks"]
+            }
+          }
+        },
+        {
+          "name": "Toggle Task Completion",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}/tasks/{{taskId}}/complete",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}", "tasks", "{{taskId}}", "complete"]
+            }
+          }
+        },
+        {
+          "name": "Toggle Task Star",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}/tasks/{{taskId}}/star",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}", "tasks", "{{taskId}}", "star"]
+            }
+          }
+        },
+        {
+          "name": "Get Task Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}/tasks/stats?date={{date}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}", "tasks", "stats"],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "{{date}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reflection Management",
+      "item": [
+        {
+          "name": "Get Reflections",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}/reflections",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}", "reflections"]
+            }
+          }
+        },
+        {
+          "name": "Create Reflection",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date\": \"{{date}}\",\n  \"energyRating\": 8,\n  \"reflectionText\": \"Great day, feeling productive!\",\n  \"username\": \"{{username}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}/reflections",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}", "reflections"]
+            }
+          }
+        },
+        {
+          "name": "Get Today's Reflection",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}/reflections/today",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}", "reflections", "today"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Energy Assessment",
+      "item": [
+        {
+          "name": "Get Energy Assessments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}/energy",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}", "energy"]
+            }
+          }
+        },
+        {
+          "name": "Create Energy Assessment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date\": \"{{date}}\",\n  \"energyLevel\": 4,\n  \"username\": \"{{username}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}/energy",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}", "energy"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Daily Data",
+      "item": [
+        {
+          "name": "Get Daily Data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}/daily-data?date={{date}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}", "daily-data"],
+              "query": [
+                {
+                  "key": "date",
+                  "value": "{{date}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Daily Data Range",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/{{username}}/daily-data/range?startDate=2024-01-01&endDate=2024-01-07",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "{{username}}", "daily-data", "range"],
+              "query": [
+                {
+                  "key": "startDate",
+                  "value": "2024-01-01"
+                },
+                {
+                  "key": "endDate",
+                  "value": "2024-01-07"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+} 
